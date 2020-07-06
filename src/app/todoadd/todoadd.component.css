@@ -1,0 +1,9 @@
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+.alignCancel{
+    position: relative;
+    left: 80px;
+    bottom: 98px;
+}

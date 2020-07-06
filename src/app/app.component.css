@@ -1,0 +1,20 @@
+.mainheader{
+  background-color: #563d7c;
+  position: fixed;
+  text-align: center;
+  left: 0px;
+  z-index: 5;
+  height: 70px;
+}
+.logo{
+  height: 50px;
+    width: 50px;
+    position: fixed;
+    top: 14px;
+    left: 50px;
+    z-index: 10;
+}
+.searchicon{
+  position: relative;
+  top:80px;
+}
