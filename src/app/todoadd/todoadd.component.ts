@@ -21,14 +21,13 @@ export class TodoaddComponent implements OnInit {
     this.appService.highlightColor();
   }
   
-
-
   onSubmit() {
     this.submitted = true;
     this.appService.addStudentDetail(this.signUpForm)
     this.signUpForm.reset();
     setTimeout(()=>{this.route.navigate([''],{relativeTo:this.currentRoute})},1000);
   }
+  
   cancel(){
     this.cancelled = true;
     setTimeout(()=>{this.route.navigate([''],{relativeTo:this.currentRoute})},1000);

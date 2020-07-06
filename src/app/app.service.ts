@@ -1,6 +1,5 @@
 export class AppService{
     searchTable:boolean;
-    pageSize = 5;
     studentDetail = {id:"1",name:"Sumeru",gender:"Male",std:"12",status:"Pass"}
     gender=["Male","Female"]
     studentDetails = [ {id:"1",name:"Karthik", gender:"Male",std:"12",status:"Pass"},
@@ -14,7 +13,16 @@ export class AppService{
     {id:"9", name:"Vignesh", gender:"Male",std:"12",status:"Pass"},
     {id:"10", name:"Manish", gender:"Male",std:"10",status:"Fail"},
     {id:"11", name:"Sarvesh", gender:"Male",std:"12",status:"Pass"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"}
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
  ]
     
     constructor(){
@@ -82,88 +90,6 @@ export class AppService{
         }
         searchedList.shift();
         return searchedList;
-    }
-
-    getSearchedStudentDataLength(searchedValue){
-        let length;
-        let k = this.searchStudentDetails(searchedValue).length;
-        if(k<this.pageSize){
-            length = 1;
-        }else{
-            if(k%this.pageSize===0){
-                length = k/this.pageSize;
-            }else{
-                length = Math.ceil(k/this.pageSize)
-            }
-        }
-        let makingArray = Array(length).fill(1).map((i)=>i);
-        return makingArray;
-    }
-
-    getStudentDataLength(){
-        let length;
-        let k = this.studentDetails.length;
-        if(k<this.pageSize){
-            length = 1;
-        }else{
-            if(k%this.pageSize===0){
-                length = k/this.pageSize;
-            }else{
-                length = Math.ceil(k/this.pageSize)
-            }
-        }
-        let makingArray = Array(length).fill(1).map((i)=>i);
-        return makingArray;
-    }
-
-    getPaginationDetails(pageNumber){
-        let k;
-        let studentDetails = this.getStudentDetails()
-        let studentDetailsLength = studentDetails.length; 
-        if(pageNumber === 1){
-            if(studentDetailsLength < this.pageSize){
-                k = studentDetails
-            }else{
-                k = studentDetails.slice(0,this.pageSize)
-            }
-        }else{
-            let sum = pageNumber*this.pageSize
-            if(sum>studentDetailsLength){
-                let remainingItems = sum - studentDetailsLength
-                k = studentDetails.slice((sum-5),(remainingItems+sum))
-            }else if(sum<studentDetailsLength && sum%this.pageSize !==0){
-                let remainingItems = studentDetailsLength - sum
-                k = studentDetails.slice(sum,(remainingItems+sum))
-            }else if(sum%this.pageSize===0 || sum === studentDetailsLength){
-                k = studentDetails.slice((sum-5),sum)
-            }
-        }
-        return k;
-    }
-
-    getSearchPaginationDetails(pageNumber,searchedValue){
-        let k;
-        let searchedStudentDetails = this.searchStudentDetails(searchedValue)
-        let searchedStudentDetailsLength = searchedStudentDetails.length; 
-        if(pageNumber === 1){
-            if( searchedStudentDetailsLength < this.pageSize){
-                k = searchedStudentDetails
-            }else{
-                k = searchedStudentDetails.slice(0,this.pageSize)
-            }
-        }else{
-            let sum = pageNumber*this.pageSize
-            if(sum>searchedStudentDetailsLength){
-                let remainingItems = sum - searchedStudentDetailsLength
-                k = searchedStudentDetails.slice((sum-5),(remainingItems+sum))
-            }else if(sum<searchedStudentDetailsLength && sum%this.pageSize !==0){
-                let remainingItems = searchedStudentDetailsLength - sum
-                k = searchedStudentDetails.slice(sum,(remainingItems+sum))
-            }else if(sum%this.pageSize===0 || sum === searchedStudentDetailsLength){
-                k = searchedStudentDetails.slice((sum-5),sum)
-            }
-        }
-        return k;
     }
 
 

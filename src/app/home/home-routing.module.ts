@@ -5,8 +5,9 @@ import { TodoeditComponent } from '../todoedit/todoedit.component';
 import { todoEditResolver } from '../todoedit-resolver.service';
 import { HomeComponent } from '../home/home.component';
 import {PagenotfoundComponent} from '../pagenotfound/pagenotfound.component'
+import { AuthGuard } from '../auth-guard.service';
 const routes:Routes = [
-    {path:"",component:HomeComponent,
+    {path:"",component:HomeComponent, canActivateChild:[AuthGuard],
     children:[{path:"student/add",component:TodoaddComponent},
     {path:"student/edit/:id",component:TodoeditComponent, resolve:{studentData:todoEditResolver}, 
     }

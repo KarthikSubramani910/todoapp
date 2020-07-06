@@ -10,6 +10,8 @@ import {todoEditResolver} from '../todoedit-resolver.service';
 import {SigninComponent} from '../signin/signin.component'
 import {AuthService} from '../auth.service'
 import {PagenotfoundComponent} from "../pagenotfound/pagenotfound.component"
+import { AuthGuard } from '../auth-guard.service';
+import {PaginationService} from '../pagination.service'
 
 
 @NgModule({
@@ -19,7 +21,7 @@ import {PagenotfoundComponent} from "../pagenotfound/pagenotfound.component"
     SigninComponent,
     PagenotfoundComponent],
     imports:[CommonModule, HomeRoutingModule, FormsModule],
-    providers:[AppService,todoEditResolver,AuthService]
+    providers:[AppService,todoEditResolver,AuthService, AuthGuard, PaginationService]
 })
 export class HomeModule{
 

@@ -73,11 +73,12 @@
                 <nav aria-label="...">
                     <ul class="pagination">
                         <li [ngClass]="{disabled: defaultPageNumber-1 === 0}" tab-index= -1 class="page-item">
-                            <a  class="page-link"(click)="previousPage()"><strong>Previous</strong></a>
+                            <a  class="page-link"(click)="page(reverse,!search)"><strong>Previous</strong></a>
                         </li>
-                        <li *ngFor="let s of pageLength;let i=index" class="page-item"><a [ngClass]="{activepage: defaultPageNumber === i+1}" class="page-link"(click)="getPagination(i+1)"><strong>{{i+1}}</strong></a></li>
+                        <li *ngFor="let s of pageLength;let i=index" class="page-item"><a [ngClass]="{activepage: defaultPageNumber === i+1}" 
+                            class="page-link"(click)="getPagination(i+1,!search)"><strong>{{i+1}}</strong></a></li>
                         <li [ngClass]="{disabled: defaultPageNumber === pageLength.length}" tab-index= -1 class="page-item">
-                            <a  class="page-link" (click)="nextPage()"><strong>Next</strong></a>
+                            <a  class="page-link" (click)="page(!reverse,!search)"><strong>Next</strong></a>
                         </li>
                     </ul>
                 </nav>
@@ -91,11 +92,12 @@
                 <nav aria-label="...">
                     <ul class="pagination">
                         <li [ngClass]="{disabled: defaultSearchPageNumber-1 === 0}" class="page-item">
-                            <a  class="page-link"(click)="previousSearchPage()"><strong>Previous</strong></a>
+                            <a  class="page-link"(click)="page(reverse,search)"><strong>Previous</strong></a>
                         </li>
-                        <li *ngFor="let s of searchPageLength;let i=index" class="page-item"><a [ngClass]="{activepage: defaultSearchPageNumber === i+1}" class="page-link"(click)="getSearchPagination(i+1)"><strong>{{i+1}}</strong></a></li>
+                        <li *ngFor="let s of searchPageLength;let i=index" class="page-item"><a [ngClass]="{activepage: defaultSearchPageNumber === i+1}" 
+                            class="page-link"(click)="getPagination(i+1,search)"><strong>{{i+1}}</strong></a></li>
                         <li [ngClass]="{disabled: defaultSearchPageNumber === searchPageLength.length}" class="page-item">
-                            <a  class="page-link" (click)="nextSearchPage()"><strong>Next</strong></a>
+                            <a  class="page-link" (click)="page(!reverse,search)"><strong>Next</strong></a>
                         </li>
                     </ul>
                 </nav>

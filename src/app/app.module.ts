@@ -15,7 +15,7 @@ import { HomeModule } from './home/home.module';
     AppRoutingModule,
     HomeModule
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
