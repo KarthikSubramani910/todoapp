@@ -1,5 +1,5 @@
 .edits{
-    position: relative;
+    position: fixed;
     right: 20px;
     bottom: 25px;
 }
@@ -62,15 +62,15 @@
     pointer-events: none;
 }
 .highlight{
-    
+    font-weight: bolder;
+    background-color:#e5e2eb;
 }
 .table{
     border-color: black;
 }
 .addstudent{
     position: relative;
-    right: 708px;
-    top: 266px;
+    right: 17px;
 }
 
 .changeTableSize{

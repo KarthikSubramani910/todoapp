@@ -21,19 +21,19 @@
                     </label>
                 </span>
             </div>
-            <!-- <p *ngIf="!userData.valid && userData.touched">UserData is invalid</p> -->
             <button style="position:relative;bottom:64px;" class="btn btn-primary" type="submit" [disabled]="!f.valid"><strong>Submit</strong></button>
             <div class="alignCancel">
                 <button style="background-color: lightgrey;color:#337ab7;" type="button" class="btn btn-primary" (click)="cancel()"><strong>Cancel</strong></button>
             </div>
-     
+            
         </div>
     </form>
-        <div style="position: relative;bottom:70px;right:10px;" *ngIf="submitted" class="col-xs-12">
-            <p><strong>Student successfully created.</strong><p>
+    <div style="position: relative;bottom:70px;right:10px;" *ngIf="submitted" class="col-xs-12">
+        <p><strong>Student successfully created.</strong><p>
         </div>
-    
+        
         <div  style="position: relative;bottom:70px;right:10px;" *ngIf="cancelled" class="col-xs-12">
             <p><strong>Student creation cancelled.</strong></p>
         </div>
-</div>
+    </div>
+    

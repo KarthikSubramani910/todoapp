@@ -2,24 +2,20 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthService{
-    deactivate = false;
     loggedIn = false;
-    constructor(private route:Router){
-
+    
+    constructor(private route:Router){ 
     }
+    
     authenticated(){
-        const promise = new Promise((resolve,reject)=>{
-            setTimeout(()=>{resolve(this.loggedIn);},50);
-        });
-        return promise;
+        return this.loggedIn;
     }
-
     login(){
         this.loggedIn = true;
         return this.loggedIn
     }
-
-    logout(result?:boolean){
+    
+    logout(){
         this.loggedIn = false;
         return this.loggedIn;
     }

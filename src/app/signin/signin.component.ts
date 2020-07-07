@@ -1,6 +1,6 @@
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -9,14 +9,17 @@ import { AuthService } from '../auth.service';
 })
 export class SigninComponent implements OnInit {
   @Output() signedIn = new EventEmitter<boolean>(); 
-
-  constructor(private route:Router,private authService:AuthService, private currentRoute:ActivatedRoute) { }
-
-  ngOnInit(): void {
+  
+  constructor(private route:Router,
+    private authService:AuthService, 
+    private currentRoute:ActivatedRoute) { }
+    
+    ngOnInit(): void {
+    }
+    
+    logout(){
+      this.signedIn.emit(this.authService.logout());
+      this.route.navigate([''],{relativeTo:this.currentRoute})
+    }
   }
-
-  logout(){
-    this.signedIn.emit(this.authService.logout());
-    this.route.navigate([''],{relativeTo:this.currentRoute})
- }
-}
+  
