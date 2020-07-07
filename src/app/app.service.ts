@@ -14,15 +14,12 @@ export class AppService{
     {id:"10", name:"Manish", gender:"Male",std:"10",status:"Fail"},
     {id:"11", name:"Sarvesh", gender:"Male",std:"12",status:"Pass"},
     {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
-    {id:"12",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"13",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"14",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"15",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"16",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"17",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
+    {id:"18",name:"Gourav", gender:"Male",std:"10",status:"Fail"},
  ]
     
     constructor(){
