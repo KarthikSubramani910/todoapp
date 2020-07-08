@@ -2,7 +2,7 @@ import {studentDetails} from "../assets/model/localstorage"
 
 export class AppService{
     studentDetailsService = studentDetails
-
+    
     constructor(){
     }
     
@@ -34,7 +34,7 @@ export class AppService{
     }
     
     editStudentDetail(editStudentForm,index){
-        let studentDetail:any = this.getStudentDetail(index)
+        let studentDetail = this.getStudentDetail(index)
         studentDetail.name = editStudentForm.value.studentData.username
         studentDetail.status = editStudentForm.value.studentData.status
         studentDetail.std = editStudentForm.value.studentData.std
@@ -50,5 +50,10 @@ export class AppService{
         let studentInfo = this.getStudentDetails().slice();
         let studentDetails =  (searchValue === ""?studentInfo:studentInfo.filter(i=>i.name === searchValue));
         return studentDetails;
+    }
+    
+    removeHighlight(){
+        let highlight = document.querySelector(".highlight")
+        highlight.classList.remove('highlight')
     }
 }

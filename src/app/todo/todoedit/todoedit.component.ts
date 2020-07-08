@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms'
 import { Router, ActivatedRoute, Data, Params } from '@angular/router';
 import { AppService } from '../../../services/app.service';
-import {genderArr} from "../../../assets/model/localstorage"
+import {genderArr,statusArr,stdArr} from "../../../assets/model/localstorage"
 
 
 @Component({
@@ -15,8 +15,8 @@ export class TodoeditComponent implements OnInit {
   getStudent : {id:string,name:string,std:string,status:string,gender:string};
   getStudentId:number;
   genders=genderArr
-  submitted=false;
-  cancelled=false;
+  statuses = statusArr
+  stds=stdArr
   
   constructor(private route:Router,
     private currentRoute:ActivatedRoute, 
@@ -32,14 +32,14 @@ export class TodoeditComponent implements OnInit {
       }
       
       onSubmit() {
-        this.submitted = true;
         this.appService.editStudentDetail(this.studentEditForm,this.getStudentId)
         this.studentEditForm.reset();
         this.route.navigate([''],{relativeTo:this.currentRoute})
+        this.appService.removeHighlight()
       }
       cancel(){
-        this.cancelled = true;
         this.route.navigate([''],{relativeTo:this.currentRoute});
+        this.appService.removeHighlight()
       }
     }
     

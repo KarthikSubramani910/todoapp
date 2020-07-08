@@ -3,6 +3,7 @@ import { AppService } from '../../services/app.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {NgForm} from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
+import { PaginationService } from 'src/services/pagination.service';
 
 
 
@@ -13,17 +14,19 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('login') signInForm: NgForm;
-  searchValue=""
   loggedIn=false;
   studentId:number;
-  highlight = false;
-
+  searchValue=""
+  reverse = true;
+  defaultPageNumber = 1;
+  pageLength;
   
   constructor(private appService:AppService,
     private currentRoute:ActivatedRoute, 
     private route: Router, 
     private elementRef: ElementRef, 
-    private authService:AuthService){
+    private authService:AuthService,
+    private paginationService:PaginationService){
     }
     
     ngAfterViewInit(){
@@ -31,8 +34,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
     
     ngOnInit(){
-      this.searchTheStudentDetailsLatest(this.searchValue);
-      this.highlight = false;
+      let studentDetails = this.getStudentDetails(this.searchValue);
+      this.pageLength = this.paginationService.getStudentDataLength(this.searchValue,studentDetails)
     }
     
     logout(logout){
@@ -41,11 +44,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
     
     onSubmit() {
       this.loggedIn = this.authService.login();
+      this.defaultPageNumber =1;
+      this.searchValue = ""
       this.signInForm.reset();
     }
     
-    searchTheStudentDetailsLatest(searchValue){
-      return this.appService.searchStudentDetailsLatest(searchValue);
+    getStudentDetails(searchValue){
+      let studentDetails = this.paginationService.getPaginationDetails(this.defaultPageNumber,searchValue)
+      this.pageLength = this.paginationService.getStudentDataLength(this.searchValue,studentDetails)
+      return studentDetails
     }     
     
     addStudent(){
@@ -54,12 +61,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
     
     editStudent(index){
       this.route.navigate(['student/edit',index])
-      this.highlight = true;
-      this.highlight === true ?this.studentId = index:this.studentId = 0;
+      this.studentId = index;
     }
     
     deleteStudentDetail(value){
       this.appService.deleteStudentDetail(value);
       this.route.navigate([''],{relativeTo:this.currentRoute})
+    }
+    
+    getPagination(index){
+      this.defaultPageNumber = index;
+    }
+    
+    page(reverse){
+      reverse?this.defaultPageNumber--:this.defaultPageNumber++     
     }
   }

@@ -11,6 +11,7 @@ import {SigninComponent} from '../signin/signin.component'
 import {AuthService} from '../../services/auth.service'
 import {PagenotfoundComponent} from "../pagenotfound/pagenotfound.component"
 import { AuthGuard } from '../../guards/auth.guard';
+import {PaginationService} from '../../services/pagination.service'
 
 
 
@@ -20,10 +21,11 @@ import { AuthGuard } from '../../guards/auth.guard';
         TodoaddComponent,
         TodoeditComponent,
         SigninComponent,
-        PagenotfoundComponent],
-        imports:[CommonModule, HomeRoutingModule, FormsModule],
-        providers:[AppService,todoEditResolver,AuthService, AuthGuard]
-    })
-    export class HomeModule{
-        
-    }
+        PagenotfoundComponent
+    ],
+    imports:[CommonModule, HomeRoutingModule, FormsModule],
+    providers:[AppService,todoEditResolver, PaginationService, AuthService, AuthGuard]
+})
+export class HomeModule{
+    
+}

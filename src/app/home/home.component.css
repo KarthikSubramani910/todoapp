@@ -37,7 +37,8 @@
 }
 .searchPos{
     position: relative;
-    right:20px;
+    left:-5px;
+    width:350px;
 }
 .passed{
     background-color: lightgreen;
