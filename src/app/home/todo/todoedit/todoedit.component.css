@@ -1,0 +1,22 @@
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.alignCancel {
+  position: relative;
+  left: 80px;
+  bottom: 98px;
+}
+
+.alignCancel > .btnprimary:hover {
+  color: white;
+  background-color: #286090;
+}
+
+.passed {
+  background-color: lightgreen;
+}
+
+.failed {
+  background-color: #ee9999;
+}

@@ -1,0 +1,17 @@
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.alignCancel {
+  position: relative;
+  left: 80px;
+  bottom: 98px;
+}
+
+.passed {
+  background-color: lightgreen;
+}
+
+.failed {
+  background-color: #ee9999;
+}

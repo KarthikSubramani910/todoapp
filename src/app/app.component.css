@@ -1,4 +1,4 @@
-.mainheader{
+.mainheader {
   background-color: #563d7c;
   position: fixed;
   text-align: center;
@@ -6,7 +6,7 @@
   z-index: 5;
   height: 70px;
 }
-.logo{
+.logo {
   height: 50px;
   width: 50px;
   position: fixed;
@@ -14,7 +14,7 @@
   left: 50px;
   z-index: 10;
 }
-.searchicon{
+.searchicon {
   position: relative;
-  top:80px;
+  top: 80px;
 }
