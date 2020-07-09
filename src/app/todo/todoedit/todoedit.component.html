@@ -6,13 +6,21 @@
                 <label for="username">Name</label>
                 <input type="text" style="width: 200px;" id="username" class="form-control" [ngModel]="getStudent.name" name="username" required>
             </div>
-            <div class="form-group">
-                <label for="std">Class</label>
-                <input type="text" style="width: 50px;" id="std" class="form-control" [ngModel]="getStudent.std" name="std"  required>
+            <div style="width:65px;" class="form-group">
+                <label for="std">Class</label>   
+                <select class="form-control"  [ngModel]="getStudent.std"  name="std">
+                    <option *ngFor="let std of stds">
+                        {{std}}
+                    </option>
+                </select>
             </div>
-            <div style="position:relative;bottom:74px;left:60px;" class="form-group">
-                <label for="status">Status</label>
-                <input type="text" style="width: 70px;" id="status" class="form-control" [ngModel]="getStudent.status" name="status"  required>
+            <div style="position:relative;bottom:74px;left:80px;width:80px;" class="form-group">
+                <label>Status</label>
+                <select class="form-control"  [ngModel]="getStudent.status" name="status">
+                    <option [ngClass]="{passed: status === 'Pass',failed: status === 'Fail' }" *ngFor="let status of statuses">
+                        {{status}}
+                    </option>
+                </select>
             </div>
             <div style="position:relative;bottom:74px;" class="form-group">
                 <div class="radio" *ngFor="let gender of genders">
@@ -21,22 +29,10 @@
                     </label>
                 </div>
             </div>
-            <!-- <p *ngIf="!userData.valid && userData.touched">UserData is invalid</p> -->
             <button  style="position:relative;bottom:64px;" class="btn btn-primary" type="submit"><strong>Submit</strong></button>
             <div class="alignCancel">
                 <button type="button" style="background-color: lightgrey;color:#337ab7;"class="btn btn-primary" (click)="cancel()"><strong>Cancel</strong></button>
-            </div>
-     
+            </div>  
         </div>
     </form>
-    <div class="row" *ngIf="submitted">
-        <div style="position: relative;bottom:70px;right:10px;"  class="col-xs-12">
-            <p><strong>Student updated successfully!!!</strong></p>
-        </div>
-    </div>
-    <div class="row" *ngIf="cancelled">
-        <div style="position: relative;bottom:70px;right:10px;"  class="col-xs-12">
-            <p><strong>Student update cancelled.</strong></p>
-        </div>
-    </div>
 </div>

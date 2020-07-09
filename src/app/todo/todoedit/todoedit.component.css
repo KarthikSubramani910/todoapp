@@ -12,3 +12,11 @@ input.ng-invalid.ng-touched{
     color:white;
     background-color: #286090;
 }
+
+.passed{
+    background-color: lightgreen;
+}
+
+.failed{
+    background-color: #EE9999;;
+}

@@ -1,9 +1,10 @@
-import { Component,ViewChild,ElementRef,OnInit, AfterViewInit, DoCheck } from '@angular/core';
-import { AppService } from '../app.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component,ViewChild,ElementRef,OnInit, AfterViewInit, DoCheck, OnChanges } from '@angular/core';
+import { AppService } from '../../services/app.service';
+import { Router } from '@angular/router';
 import {NgForm} from '@angular/forms'
-import { AuthService } from '../auth.service';
-import { PaginationService } from '../pagination.service';
+import { AuthService } from '../../services/auth.service';
+import { PaginationService } from 'src/services/pagination.service';
+
 
 
 @Component({
@@ -11,63 +12,47 @@ import { PaginationService } from '../pagination.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements DoCheck, AfterViewInit {
-  @ViewChild("searchValue") searchedValue:ElementRef;
+export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('login') signInForm: NgForm;
-  defaultPageNumber=1;
-  defaultSearchPageNumber=1;
-  pageLength;
-  searchPageLength;
-  rowsLength:any;
-  searchTable:boolean = false;
   loggedIn=false;
-  reverse=true;
-  search = true;
+  studentId:number;
+  searchValue=""
+  reverse = true;
+  defaultPageNumber = 1;
+  pageLength;
   
   constructor(private appService:AppService,
-    private paginationService:PaginationService, 
-    private currentRoute:ActivatedRoute, 
     private route: Router, 
-    private elementRef: ElementRef, private authService:AuthService){
+    private elementRef: ElementRef, 
+    private authService:AuthService,
+    private paginationService:PaginationService){
     }
     
     ngAfterViewInit(){
       this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#f7f7f9';
     }
     
-    ngDoCheck(){
-      this.pageLength = this.paginationService.getStudentDataLength()
-      if(this.searchTable){
-        this.searchPageLength = this.paginationService.getSearchedStudentDataLength(this.searchedValue.nativeElement.value);
-      } 
-      this.getStudentDetails();
+    ngOnInit(){
+      let studentDetails = this.getStudentDetails(this.searchValue);
+      this.pageLength = this.paginationService.getStudentDataLength(this.searchValue,studentDetails)
     }
     
     logout(logout){
       this.loggedIn = logout;
-      this.defaultPageNumber = 1;
     }
     
     onSubmit() {
       this.loggedIn = this.authService.login();
-      this.defaultPageNumber=1;
-      this.resetTable()
+      this.defaultPageNumber =1;
+      this.searchValue = ""
       this.signInForm.reset();
     }
     
-    getStudentDetails(){
-      return this.paginationService.getPaginationDetails(this.defaultPageNumber)
-    }
-    
-    searchTheStudent(){
-      this.searchTable = true;
-      return this.paginationService.getSearchPaginationDetails(this.defaultSearchPageNumber,this.searchedValue.nativeElement.value);
-    } 
-    
-    resetTable(){
-      this.searchTable = false;
-      this.searchedValue.nativeElement.value = ""
-    }
+    getStudentDetails(searchValue){
+      let studentDetails = this.paginationService.getPaginationDetails(this.defaultPageNumber,searchValue)
+      this.pageLength = this.paginationService.getStudentDataLength(this.searchValue,studentDetails)
+      return studentDetails
+    }     
     
     addStudent(){
       this.route.navigate(['student/add'])
@@ -75,20 +60,18 @@ export class HomeComponent implements DoCheck, AfterViewInit {
     
     editStudent(index){
       this.route.navigate(['student/edit',index])
-      this.appService.highlight(index)
+      this.studentId = index;
     }
     
     deleteStudentDetail(value){
       this.appService.deleteStudentDetail(value);
-      this.route.navigate([''],{relativeTo:this.currentRoute})
     }
     
-    getPagination(index,search){
-      search? this.defaultSearchPageNumber = index:this.defaultPageNumber = index;
+    getPagination(index){
+      this.defaultPageNumber = index;
     }
     
-    page(reverse,search){
-      search?(reverse?this.defaultSearchPageNumber--:this.defaultSearchPageNumber++):
-      (reverse?this.defaultPageNumber--:this.defaultPageNumber++)        
+    page(reverse){
+      reverse?this.defaultPageNumber--:this.defaultPageNumber++     
     }
-}
+  }

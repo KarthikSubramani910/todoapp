@@ -6,13 +6,21 @@
                 <label for="username">Name</label>
                 <input style="width: 200px;" type="text" id="username" class="form-control" ngModel name="username" required>
             </div>
-            <div class="form-group">
-                <label for="std">Class</label>
-                <input style="width: 50px;" type="text" id="std" class="form-control" ngModel name="std" required>
+            <div style="width:65px;" class="form-group">
+                <label for="std">Class</label>   
+                <select class="form-control" ngModel [value]="std" name="std">
+                    <option *ngFor="let std of stds">
+                        {{std}}
+                    </option>
+                </select>
             </div>
-            <div style="position:relative;bottom:74px;left:60px;" class="form-group">
-                <label for="status">Status</label>
-                <input style="width: 70px;" type="text" id="status" class="form-control" ngModel name="status" required>
+            <div style="position:relative;bottom:74px;left:80px;width:80px;" class="form-group">
+                <label>Status</label>
+                <select class="form-control" ngModel [value]="status" name="status">
+                    <option [ngClass]="{passed: status === 'Pass',failed: status === 'Fail' }" *ngFor="let status of statuses">
+                        {{status}}
+                    </option>
+                </select>
             </div>
             <div style="position:relative;bottom:74px;" class="form-group">
                 <span class="radio" *ngFor="let gender of genders">
@@ -21,19 +29,10 @@
                     </label>
                 </span>
             </div>
-            <!-- <p *ngIf="!userData.valid && userData.touched">UserData is invalid</p> -->
             <button style="position:relative;bottom:64px;" class="btn btn-primary" type="submit" [disabled]="!f.valid"><strong>Submit</strong></button>
             <div class="alignCancel">
                 <button style="background-color: lightgrey;color:#337ab7;" type="button" class="btn btn-primary" (click)="cancel()"><strong>Cancel</strong></button>
-            </div>
-     
+            </div> 
         </div>
     </form>
-        <div style="position: relative;bottom:70px;right:10px;" *ngIf="submitted" class="col-xs-12">
-            <p><strong>Student successfully created.</strong><p>
-        </div>
-    
-        <div  style="position: relative;bottom:70px;right:10px;" *ngIf="cancelled" class="col-xs-12">
-            <p><strong>Student creation cancelled.</strong></p>
-        </div>
 </div>

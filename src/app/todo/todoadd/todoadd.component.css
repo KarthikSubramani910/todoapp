@@ -7,3 +7,11 @@ input.ng-invalid.ng-touched{
     left: 80px;
     bottom: 98px;
 }
+
+.passed{
+    background-color: lightgreen;
+}
+
+.failed{
+    background-color: #EE9999;;
+}
