@@ -53,10 +53,13 @@ export class AppService {
 
   searchStudentDetailsLatest(searchValue) {
     let studentInfo = this.getStudentDetails().slice();
+    console.log('SearchedValue', searchValue);
     let studentDetails =
       searchValue === ''
         ? studentInfo
-        : studentInfo.filter((i) => i.name === searchValue);
+        : studentInfo.filter((i) => {
+            return i.name === searchValue;
+          });
     return studentDetails;
   }
 

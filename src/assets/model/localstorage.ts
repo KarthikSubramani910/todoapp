@@ -12,6 +12,11 @@ export let studentDetails = [
   { id: '10', name: 'Vignesh', gender: 'Male', std: '12', status: 'Pass' },
   { id: '11', name: 'Manish', gender: 'Male', std: '10', status: 'Fail' },
   { id: '12', name: 'Sarvesh', gender: 'Male', std: '12', status: 'Pass' },
+  { id: '12', name: 'Sarvesh', gender: 'Male', std: '12', status: 'Pass' },
+  { id: '12', name: 'Sarvesh', gender: 'Male', std: '12', status: 'Pass' },
+  { id: '12', name: 'Sarvesh', gender: 'Male', std: '12', status: 'Pass' },
+  { id: '12', name: 'Sarvesh', gender: 'Male', std: '12', status: 'Pass' },
+  { id: '12', name: 'Sarvesh', gender: 'Male', std: '12', status: 'Pass' },
 ];
 
 //HomeModule

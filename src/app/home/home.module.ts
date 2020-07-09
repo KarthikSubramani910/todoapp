@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AuthGuard } from '../../guards/auth.guard';
 import { PaginationService } from '../../services/pagination.service';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PaginationService } from '../../services/pagination.service';
     TodoeditComponent,
     SigninComponent,
     PagenotfoundComponent,
+    SearchComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, FormsModule],
   providers: [

@@ -26,7 +26,7 @@ export class PaginationService {
     return makingArray;
   }
 
-  getPaginationDetails(pageNumber, searchedValue) {
+  getPaginationDetails(searchedValue, pageNumber?) {
     let paginationDetails;
     let sum = pageNumber * this.pageSize;
     let searchedStudentDetails = this.appService.searchStudentDetailsLatest(
@@ -42,12 +42,20 @@ export class PaginationService {
           ? searchedStudentDetails
           : searchedStudentDetails.slice(0, this.pageSize)
         : sum > searchedStudentDetailsLength
-        ? searchedStudentDetails.slice(sum - 5, remainingItemsFromSum + sum)
+        ? searchedStudentDetails.slice(
+            sum - this.pageSize,
+            remainingItemsFromSum + sum
+          )
         : sum < searchedStudentDetailsLength && sum % this.pageSize !== 0
         ? searchedStudentDetails.slice(sum, remainingItemsFromSearch + sum)
         : sum % this.pageSize === 0 || sum === searchedStudentDetailsLength
-        ? searchedStudentDetails.slice(sum - 5, sum)
-        : searchedStudentDetails.slice(0, this.pageSize);
-    return paginationDetails;
+        ? searchedStudentDetails.slice(sum - this.pageSize, sum)
+        : searchedStudentDetails.slice();
+    let dataLength = this.getStudentDataLength(
+      searchedValue,
+      searchedStudentDetails.slice()
+    );
+    let studentDetails = [paginationDetails, dataLength];
+    return studentDetails;
   }
 }
