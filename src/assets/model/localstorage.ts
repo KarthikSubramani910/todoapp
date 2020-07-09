@@ -13,7 +13,6 @@ export let studentDetails = [ {id:"1",name:"Karthik", gender:"Male",std:"12",sta
 {id:"12", name:"Sarvesh", gender:"Male",std:"12",status:"Pass"}
 ]
 
-
 //HomeModule
 export let genderArr = ["Male","Female"]
 export let statusArr = ['Pass','Fail']

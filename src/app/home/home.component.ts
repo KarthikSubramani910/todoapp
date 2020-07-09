@@ -1,6 +1,6 @@
 import { Component,ViewChild,ElementRef,OnInit, AfterViewInit, DoCheck, OnChanges } from '@angular/core';
 import { AppService } from '../../services/app.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {NgForm} from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
 import { PaginationService } from 'src/services/pagination.service';
@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   pageLength;
   
   constructor(private appService:AppService,
-    private currentRoute:ActivatedRoute, 
     private route: Router, 
     private elementRef: ElementRef, 
     private authService:AuthService,
@@ -66,7 +65,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     
     deleteStudentDetail(value){
       this.appService.deleteStudentDetail(value);
-      this.route.navigate([''],{relativeTo:this.currentRoute})
     }
     
     getPagination(index){
