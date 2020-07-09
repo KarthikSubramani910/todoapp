@@ -4,8 +4,6 @@ import {
   ElementRef,
   OnInit,
   AfterViewInit,
-  DoCheck,
-  OnChanges,
 } from '@angular/core';
 import { AppService } from '../../services/app.service';
 import { Router } from '@angular/router';
@@ -18,7 +16,7 @@ import { PaginationService } from 'src/services/pagination.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements AfterViewInit {
   @ViewChild('login') signInForm: NgForm;
   loggedIn = false;
   studentId: number;
@@ -40,14 +38,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       '#f7f7f9';
   }
 
-  ngOnInit() {
-    let studentDetails = this.getStudentDetails(this.searchValue);
-    this.pageLength = this.paginationService.getStudentDataLength(
-      this.searchValue,
-      studentDetails
-    );
-  }
-
   logout(logout) {
     this.loggedIn = logout;
   }
@@ -59,16 +49,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.signInForm.reset();
   }
 
-  getStudentDetails(searchValue) {
-    let studentDetails = this.paginationService.getPaginationDetails(
-      this.defaultPageNumber,
-      searchValue
+  getStudentDetails(searchvalue) {
+    this.searchValue = searchvalue;
+    let studentSearch = this.paginationService.getPaginationDetails(
+      searchvalue,
+      this.defaultPageNumber
     );
-    this.pageLength = this.paginationService.getStudentDataLength(
-      this.searchValue,
-      studentDetails
-    );
-    return studentDetails;
+    this.pageLength = studentSearch[1];
+    return studentSearch[0];
   }
 
   addStudent() {
