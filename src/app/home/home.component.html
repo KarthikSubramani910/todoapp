@@ -109,7 +109,7 @@
         </nav>
       </div>
       <div class="col-xs-6 col-md-5 edits">
-        <app-signin *ngIf="loggedIn" (signedIn)="logout($event)"></app-signin>
+        <app-signin *ngIf="loggedIn"></app-signin>
         <router-outlet></router-outlet>
       </div>
       <div *ngIf="!loggedIn" class="col-xs-6 login">

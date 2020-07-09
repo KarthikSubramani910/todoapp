@@ -16,24 +16,26 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @Output() setValue: EventEmitter<string> = new EventEmitter();
-  private _searchSubject: Subject<string> = new Subject();
+  private searchSubject: Subject<string> = new Subject();
   constructor() {}
 
   ngOnInit() {
-    this._setSearchSubscription();
+    this.setSearchSubscription();
   }
 
   public updateSearch(searchValue: string) {
-    this._searchSubject.next(searchValue);
+    this.searchSubject.next(searchValue);
   }
-  private _setSearchSubscription() {
-    this._searchSubject
+
+  private setSearchSubscription() {
+    this.searchSubject
       .pipe(debounceTime(500))
       .subscribe((searchValue: string) => {
         this.setValue.emit(searchValue);
       });
   }
+
   ngOnDestroy() {
-    this._searchSubject.unsubscribe();
+    this.searchSubject.unsubscribe();
   }
 }

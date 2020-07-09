@@ -1,21 +1,16 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
 @Injectable()
 export class AuthService {
-  loggedIn = false;
-
+  loggedIn;
+  signedIn: Subject<boolean> = new Subject();
   constructor(private route: Router) {}
 
-  authenticated() {
-    return this.loggedIn;
-  }
-  login() {
-    this.loggedIn = true;
-    return this.loggedIn;
-  }
-
-  logout() {
-    this.loggedIn = false;
+  authenticatedSubject() {
+    this.signedIn.subscribe((login: boolean) => {
+      this.loggedIn = login;
+    });
     return this.loggedIn;
   }
 }
