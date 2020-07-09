@@ -2,14 +2,7 @@
   <div class="row">
     <div class="col-xs-5">
       <br />
-      <input
-        type="text"
-        class="form-control searchPos"
-        (keyup)="getStudentDetails(searchValue)"
-        placeholder="Type here to search..."
-        name="Search"
-        [(ngModel)]="searchValue"
-      />
+      <app-search (setValue)="getStudentDetails($event)"></app-search>
     </div>
   </div>
   <div class="row">
