@@ -1,14 +1,15 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css'],
 })
-export class SigninComponent implements OnInit {
-  @Output() signedIn = new EventEmitter<boolean>();
+export class SigninComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
 
   constructor(
     private route: Router,
@@ -16,10 +17,16 @@ export class SigninComponent implements OnInit {
     private currentRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.subscription = this.authService.signedIn.subscribe();
+  }
 
   logout() {
-    this.signedIn.emit(this.authService.logout());
+    this.authService.signedIn.next(false);
     this.route.navigate([''], { relativeTo: this.currentRoute });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

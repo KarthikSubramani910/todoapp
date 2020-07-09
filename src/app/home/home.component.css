@@ -34,11 +34,6 @@
 .headersec {
   color: rgb(63, 16, 233);
 }
-/* .searchPos {
-  position: relative;
-  left: -5px;
-  width: 350px;
-} */
 .passed {
   background-color: lightgreen;
   position: relative;
