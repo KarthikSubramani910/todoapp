@@ -1,0 +1,75 @@
+<div class="col-xs-offset-2 col-xs-7">
+  <h3><strong>Edit Student</strong></h3>
+  <form (ngSubmit)="onSubmit()" #studentEditForm="ngForm">
+    <div id="user-data" ngModelGroup="studentData" #userData="ngModelGroup">
+      <div class="form-group">
+        <label for="username">Name</label>
+        <input
+          type="text"
+          style="width: 200px;"
+          id="username"
+          class="form-control"
+          [ngModel]="getStudent.name"
+          name="username"
+          required
+        />
+      </div>
+      <div style="width: 65px;" class="form-group">
+        <label for="std">Class</label>
+        <select class="form-control" [ngModel]="getStudent.std" name="std">
+          <option *ngFor="let std of stds">
+            {{ std }}
+          </option>
+        </select>
+      </div>
+      <div
+        style="position: relative; bottom: 74px; left: 80px; width: 80px;"
+        class="form-group"
+      >
+        <label>Status</label>
+        <select
+          class="form-control"
+          [ngModel]="getStudent.status"
+          name="status"
+        >
+          <option
+            [ngClass]="{ passed: status === 'Pass', failed: status === 'Fail' }"
+            *ngFor="let status of statuses"
+          >
+            {{ status }}
+          </option>
+        </select>
+      </div>
+      <div style="position: relative; bottom: 74px;" class="form-group">
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              [ngModel]="getStudent.gender"
+              [value]="gender"
+              required
+            /><strong>{{ gender }}</strong>
+          </label>
+        </div>
+      </div>
+      <button
+        style="position: relative; bottom: 64px;"
+        class="btn btn-primary"
+        type="submit"
+      >
+        <strong>Submit</strong>
+      </button>
+      <div class="alignCancel">
+        <button
+          type="button"
+          style="background-color: lightgrey; color: #337ab7;"
+          class="btn btn-primary"
+          (click)="cancel()"
+        >
+          <strong>Cancel</strong>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

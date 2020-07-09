@@ -1,74 +1,168 @@
 <div class="container">
-    <div class="row">
-        <div class="col-xs-5">
-            <br>
-            <input type="text" class="form-control searchPos" (keyup)="getStudentDetails(searchValue)" placeholder="Type here to search..." name="Search" [(ngModel)]="searchValue">
-        </div>
+  <div class="row">
+    <div class="col-xs-5">
+      <br />
+      <input
+        type="text"
+        class="form-control searchPos"
+        (keyup)="getStudentDetails(searchValue)"
+        placeholder="Type here to search..."
+        name="Search"
+        [(ngModel)]="searchValue"
+      />
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-lg-7 col-md-5 changeTableSize  home table-responsive">
-            <table class="table table-hover"  data-pagecount="5">
-                <thead>
-                    <tr class="headersec">
-                        <th scope="col">#Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Class</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Remarks</th>
-                        <th *ngIf="loggedIn" scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let student of getStudentDetails(searchValue);let i = index">
-                    <tr [ngClass]="{highlight:student.id === studentId}">
-                        <td class="manifest">{{student.id}}</td>
-                        <td>{{student.name}}</td>
-                        <td>{{student.gender}}</td>
-                        <td>{{student.std}}</td>  
-                        <td><button type="menu" class="btn btn-default" [ngClass]="{passed: student.status === 'Pass',failed: student.status === 'Fail' }">{{student.status}}</button></td>
-                        <td *ngIf="student.status === 'Pass'">Good</td>
-                        <td *ngIf="student.status === 'Fail'">Need to Improve</td>
-                        <td  *ngIf="loggedIn"><a routerLink= "student/edit/:id" (click)="editStudent(student.id)" class="edit" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                        <td *ngIf="loggedIn"><a class="delete deletepos" title="Delete" (click)="deleteStudentDetail(student.id)" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div *ngIf="loggedIn" class="col-xs-4 addstudent">
-                <button style=" border-radius: 3px;"routerLink= "student/add" (click)="addStudent()" type="text"><strong>AddStudent&nbsp;</strong><i class="fa fa-plus" aria-hidden="true"></i></button>                       
+  </div>
+  <div class="row">
+    <div
+      class="col-xs-12 col-lg-7 col-md-5 changeTableSize home table-responsive"
+    >
+      <table class="table table-hover" data-pagecount="5">
+        <thead>
+          <tr class="headersec">
+            <th scope="col">#Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Class</th>
+            <th scope="col">Status</th>
+            <th scope="col">Remarks</th>
+            <th *ngIf="loggedIn" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody
+          *ngFor="let student of getStudentDetails(searchValue); let i = index"
+        >
+          <tr [ngClass]="{ highlight: student.id === studentId }">
+            <td class="manifest">{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.gender }}</td>
+            <td>{{ student.std }}</td>
+            <td>
+              <button
+                type="menu"
+                class="btn btn-default"
+                [ngClass]="{
+                  passed: student.status === 'Pass',
+                  failed: student.status === 'Fail'
+                }"
+              >
+                {{ student.status }}
+              </button>
+            </td>
+            <td *ngIf="student.status === 'Pass'">Good</td>
+            <td *ngIf="student.status === 'Fail'">Need to Improve</td>
+            <td *ngIf="loggedIn">
+              <a
+                routerLink="student/edit/:id"
+                (click)="editStudent(student.id)"
+                class="edit"
+                title="Edit"
+                data-toggle="tooltip"
+                ><i class="fa fa-pencil" aria-hidden="true"></i
+              ></a>
+            </td>
+            <td *ngIf="loggedIn">
+              <a
+                class="delete deletepos"
+                title="Delete"
+                (click)="deleteStudentDetail(student.id)"
+                data-toggle="tooltip"
+                ><i class="fa fa-trash" aria-hidden="true"></i
+              ></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="loggedIn" class="col-xs-4 addstudent">
+        <button
+          style="border-radius: 3px;"
+          routerLink="student/add"
+          (click)="addStudent()"
+          type="text"
+        >
+          <strong>AddStudent&nbsp;</strong
+          ><i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="col-xs-6 pageresize">
+        <nav aria-label="...">
+          <ul class="pagination">
+            <li
+              [ngClass]="{ disabled: defaultPageNumber - 1 === 0 }"
+              tab-index="-1"
+              class="page-item"
+            >
+              <a class="page-link" (click)="page(reverse)"
+                ><strong>Previous</strong></a
+              >
+            </li>
+            <li *ngFor="let s of pageLength; let i = index" class="page-item">
+              <a
+                [ngClass]="{ activepage: defaultPageNumber === i + 1 }"
+                class="page-link"
+                (click)="getPagination(i + 1)"
+                ><strong>{{ i + 1 }}</strong></a
+              >
+            </li>
+            <li
+              [ngClass]="{ disabled: defaultPageNumber === pageLength.length }"
+              tab-index="-1"
+              class="page-item"
+            >
+              <a class="page-link" (click)="page(!reverse)"
+                ><strong>Next</strong></a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-xs-6 col-md-5 edits">
+        <app-signin *ngIf="loggedIn" (signedIn)="logout($event)"></app-signin>
+        <router-outlet></router-outlet>
+      </div>
+      <div *ngIf="!loggedIn" class="col-xs-6 login">
+        <h3><strong>Admin Login</strong></h3>
+        <br />
+        <form (ngSubmit)="onSubmit()" #login="ngForm">
+          <div id="user-data" ngModelGroup="loginInfo" #userData="ngModelGroup">
+            <div class="form-group">
+              <label for="username">UserName</label>
+              <input
+                style="width: 200px;"
+                type="email"
+                id="username"
+                class="form-control"
+                ngModel
+                name="username"
+                email
+                placeholder="Enter Your Email Address"
+                required
+              />
             </div>
-            <div class="col-xs-6 pageresize">
-                <nav aria-label="...">
-                    <ul class="pagination">
-                        <li [ngClass]="{disabled: defaultPageNumber-1 === 0}" tab-index= -1 class="page-item">
-                            <a  class="page-link"(click)="page(reverse)"><strong>Previous</strong></a>
-                        </li>
-                        <li *ngFor="let s of pageLength;let i=index" class="page-item"><a [ngClass]="{activepage: defaultPageNumber === i+1}" 
-                            class="page-link"(click)="getPagination(i+1)"><strong>{{i+1}}</strong></a></li>
-                            <li [ngClass]="{disabled: defaultPageNumber === pageLength.length}" tab-index= -1 class="page-item">
-                                <a  class="page-link" (click)="page(!reverse)"><strong>Next</strong></a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-xs-6 col-md-5 edits">
-                    <app-signin *ngIf="loggedIn" (signedIn)= 'logout($event)'></app-signin>
-                    <router-outlet></router-outlet>
-                </div>
-                <div *ngIf="!loggedIn" class="col-xs-6 login">
-                    <h3><strong>Admin Login</strong></h3>
-                    <br>
-                    <form (ngSubmit)="onSubmit()" #login='ngForm'>
-                        <div id="user-data" ngModelGroup="loginInfo" #userData="ngModelGroup">
-                            <div class="form-group">
-                                <label for="username">UserName</label>
-                                <input style="width: 200px;" type="email" id="username" class="form-control" ngModel name="username" email placeholder="Enter Your Email Address" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input  style="width: 200px;" type="password" id="std" class="form-control" ngModel name="password" password placeholder="Enter Your Password" required>
-                            </div>
-                            <button style="position:relative;top:10px;"class="btn btn-primary" type="submit" [disabled]="!login.valid"><strong>SignIn</strong></button>                    
-                        </div>
-                    </form>
-                </div>
-                
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                style="width: 200px;"
+                type="password"
+                id="std"
+                class="form-control"
+                ngModel
+                name="password"
+                password
+                placeholder="Enter Your Password"
+                required
+              />
+            </div>
+            <button
+              style="position: relative; top: 10px;"
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!login.valid"
+            >
+              <strong>SignIn</strong>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

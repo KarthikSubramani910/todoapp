@@ -1,89 +1,88 @@
-.edits{
-    position: fixed;
-    right: 20px;
-    bottom: 25px;
+.edits {
+  position: fixed;
+  right: 20px;
+  bottom: 25px;
 }
 
-.alignCancel{
-    position: relative;
-    left: 80px;
-    bottom: 35px;
-    width:50px;
+.alignCancel {
+  position: relative;
+  left: 80px;
+  bottom: 35px;
+  width: 50px;
 }
 
-
-.login{
-    position: fixed;
-    left: 850px;
-    bottom: 190px;
+.login {
+  position: fixed;
+  left: 850px;
+  bottom: 190px;
 }
-.pageresize{
-    position: fixed;
-    top: 470px;
-    left: 45px;
-}
-
-.activepage{
-    background-color: #e5e2eb;
-    font-weight: bolder;
-    color: black;
-}
-.deletepos{
-    position: relative;
-    right: 60px;
-}
-.headersec{
-    color:rgb(63, 16, 233);
-}
-.searchPos{
-    position: relative;
-    left:-5px;
-    width:350px;
-}
-.passed{
-    background-color: lightgreen;
-    position: relative;
-    top: -4px;
-    height: 28px;
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: -7px;
-    border:none;
-    pointer-events: none;
-}
-.failed{
-    background-color:rgb(238, 153, 153);
-    position: relative;
-    top: -4px;
-    height: 28px;
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: -7px;
-    border-color: white;
-    pointer-events: none;
-}
-.highlight{
-    font-weight: bolder;
-    background-color:#e5e2eb;
-}
-.table{
-    border-color: black;
-}
-.addstudent{
-    position: relative;
-    right: 17px;
+.pageresize {
+  position: fixed;
+  top: 470px;
+  left: 45px;
 }
 
-.changeTableSize{
-    position: relative;
-    left:40px;
+.activepage {
+  background-color: #e5e2eb;
+  font-weight: bolder;
+  color: black;
 }
-.pagination .disabled{
-    cursor: not-allowed;
-    pointer-events:none;
+.deletepos {
+  position: relative;
+  right: 60px;
 }
-.home{
-    position: relative;
-    top:20px;
-    left:-15px;
+.headersec {
+  color: rgb(63, 16, 233);
+}
+.searchPos {
+  position: relative;
+  left: -5px;
+  width: 350px;
+}
+.passed {
+  background-color: lightgreen;
+  position: relative;
+  top: -4px;
+  height: 28px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: -7px;
+  border: none;
+  pointer-events: none;
+}
+.failed {
+  background-color: rgb(238, 153, 153);
+  position: relative;
+  top: -4px;
+  height: 28px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: -7px;
+  border-color: white;
+  pointer-events: none;
+}
+.highlight {
+  font-weight: bolder;
+  background-color: #e5e2eb;
+}
+.table {
+  border-color: black;
+}
+.addstudent {
+  position: relative;
+  right: 17px;
+}
+
+.changeTableSize {
+  position: relative;
+  left: 40px;
+}
+.pagination .disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.home {
+  position: relative;
+  top: 20px;
+  left: -15px;
 }
