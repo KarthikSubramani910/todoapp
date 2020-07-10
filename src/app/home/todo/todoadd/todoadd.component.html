@@ -3,14 +3,14 @@
   <form (ngSubmit)="onSubmit()" #f="ngForm">
     <div id="user-data" ngModelGroup="studentData" #userData="ngModelGroup">
       <div class="form-group">
-        <label for="username">Name</label>
+        <label for="name">Name</label>
         <input
           style="width: 200px;"
           type="text"
-          id="username"
+          id="name"
           class="form-control"
           ngModel
-          name="username"
+          name="name"
           required
         />
       </div>

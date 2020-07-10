@@ -55,7 +55,13 @@ export class PaginationService {
       searchedValue,
       searchedStudentDetails.slice()
     );
-    let studentDetails = [paginationDetails, dataLength];
+    let defaultPageNumber =
+      searchedValue != '' && dataLength.length === 1 ? 1 : pageNumber;
+    let studentDetails = {
+      studentData: paginationDetails,
+      noOfPages: dataLength,
+      pageNumber: defaultPageNumber,
+    };
     return studentDetails;
   }
 }

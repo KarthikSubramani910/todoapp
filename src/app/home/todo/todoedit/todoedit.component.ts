@@ -6,6 +6,7 @@ import {
   genderArr,
   statusArr,
   stdArr,
+  studentInfo,
 } from '../../../../assets/model/localstorage';
 
 @Component({
@@ -15,13 +16,7 @@ import {
 })
 export class TodoeditComponent implements OnInit {
   @ViewChild('studentEditForm') studentEditForm: NgForm;
-  getStudent: {
-    id: string;
-    name: string;
-    std: string;
-    status: string;
-    gender: string;
-  };
+  getStudent: studentInfo;
   getStudentId: number;
   genders = genderArr;
   statuses = statusArr;

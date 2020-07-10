@@ -42,7 +42,7 @@
   font-size: 12px;
   font-weight: 700;
   margin-bottom: -7px;
-  border: none;
+  border-color: white;
   pointer-events: none;
 }
 .failed {

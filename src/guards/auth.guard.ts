@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authService.authenticatedSubject()
+    return this.authService.authenticated()
       ? true
       : this.router.navigate(['/']);
   }

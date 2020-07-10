@@ -6,14 +6,7 @@ import {
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AppService } from '../services/app.service';
-
-interface studentInfo {
-  id: string;
-  name: string;
-  std: string;
-  status: string;
-  gender: string;
-}
+import { studentInfo } from '../assets/model/localstorage';
 
 @Injectable()
 export class todoEditResolver implements Resolve<studentInfo> {

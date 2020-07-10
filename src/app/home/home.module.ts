@@ -10,16 +10,10 @@ import { AuthService } from '../../services/auth.service';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AuthGuard } from '../../guards/auth.guard';
 import { PaginationService } from '../../services/pagination.service';
-import { SearchComponent } from './search/search.component';
 import { TodoModule } from './todo/todo.module';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    SigninComponent,
-    PagenotfoundComponent,
-    SearchComponent,
-  ],
+  declarations: [HomeComponent, SigninComponent, PagenotfoundComponent],
   imports: [CommonModule, HomeRoutingModule, FormsModule, TodoModule],
   providers: [
     AppService,
