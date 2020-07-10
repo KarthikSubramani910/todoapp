@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { PaginationService } from 'src/services/pagination.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -23,11 +24,13 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
   loggedIn: boolean = false;
   studentId: number;
-  searchValue = '';
+  searchedValue: string = '';
   reverse = true;
   defaultPageNumber = 1;
   pageLength;
-  private subscription: Subscription;
+  searchValue: Subject<string> = new Subject();
+  private authSubscription: Subscription;
+  private searchSubscription: Subscription;
 
   constructor(
     private appService: AppService,
@@ -38,11 +41,16 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.subscription = this.authService.signedIn.subscribe(
+    this.authSubscription = this.authService.signedIn.subscribe(
       (signed: boolean) => {
         this.loggedIn = signed;
       }
     );
+    this.searchSubscription = this.searchValue
+      .pipe(debounceTime(500))
+      .subscribe((search: string) => {
+        this.searchedValue = search;
+      });
   }
 
   ngAfterViewInit() {
@@ -53,18 +61,18 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   onSubmit() {
     this.authService.signedIn.next(true);
     this.defaultPageNumber = 1;
-    this.searchValue = '';
+    this.searchedValue = '';
     this.signInForm.reset();
   }
 
-  getStudentDetails(searchvalue) {
-    this.searchValue = searchvalue;
+  getStudentDetails() {
     let studentSearch = this.paginationService.getPaginationDetails(
-      searchvalue,
+      this.searchedValue,
       this.defaultPageNumber
     );
-    this.pageLength = studentSearch[1];
-    return studentSearch[0];
+    this.defaultPageNumber = studentSearch['pageNumber'];
+    this.pageLength = studentSearch['noOfPages'];
+    return studentSearch['studentData'];
   }
 
   addStudent() {
@@ -89,6 +97,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.authSubscription.unsubscribe();
+    this.searchSubscription.unsubscribe();
   }
 }

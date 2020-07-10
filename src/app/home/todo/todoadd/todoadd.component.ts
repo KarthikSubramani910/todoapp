@@ -7,27 +7,27 @@ import {
   statusArr,
   stdArr,
 } from '../../../../assets/model/localstorage';
-import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-todoadd',
   templateUrl: './todoadd.component.html',
   styleUrls: ['./todoadd.component.css'],
 })
-export class TodoaddComponent {
+export class TodoaddComponent implements OnInit {
   @ViewChild('f') signUpForm: NgForm;
   genders = genderArr;
   status = '';
-  statuses = statusArr;
   std = '';
+  statuses = statusArr;
   stds = stdArr;
 
   constructor(
     private route: Router,
     private currentRoute: ActivatedRoute,
-    private appService: AppService,
-    private authService: AuthService
+    private appService: AppService
   ) {}
+
+  ngOnInit(): void {}
 
   onSubmit() {
     this.appService.addStudentDetail(this.signUpForm);

@@ -2,14 +2,20 @@
   <div class="row">
     <div class="col-xs-5">
       <br />
-      <app-search (setValue)="getStudentDetails($event)"></app-search>
+      <input
+        type="text"
+        (keyup)="searchValue.next($event.target.value)"
+        class="form-control searchPos"
+        placeholder="Type here to search..."
+        name="Search"
+      />
     </div>
   </div>
   <div class="row">
     <div
       class="col-xs-12 col-lg-7 col-md-5 changeTableSize home table-responsive"
     >
-      <table class="table table-hover" data-pagecount="5">
+      <table class="table table-hover">
         <thead>
           <tr class="headersec">
             <th scope="col">#Id</th>
@@ -21,9 +27,7 @@
             <th *ngIf="loggedIn" scope="col">Actions</th>
           </tr>
         </thead>
-        <tbody
-          *ngFor="let student of getStudentDetails(searchValue); let i = index"
-        >
+        <tbody *ngFor="let student of getStudentDetails(); let i = index">
           <tr [ngClass]="{ highlight: student.id === studentId }">
             <td class="manifest">{{ student.id }}</td>
             <td>{{ student.name }}</td>

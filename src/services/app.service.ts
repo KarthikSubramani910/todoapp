@@ -1,4 +1,6 @@
-import { studentDetails } from '../assets/model/localstorage';
+import { studentDetails, studentInfo } from '../assets/model/localstorage';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export class AppService {
   studentDetailsService = studentDetails;
@@ -19,24 +21,21 @@ export class AppService {
   }
 
   addStudentDetail(addStudentForm) {
-    let studentData = {
-      id: '2',
-      name: 'Sumeru',
-      std: '5',
-      status: 'Pass',
-      gender: 'Male',
-    };
-    studentData.name = addStudentForm.value.studentData.username;
-    studentData.std = addStudentForm.value.studentData.std;
-    studentData.status = addStudentForm.value.studentData.status;
+    let studentData: studentInfo;
+    of(addStudentForm)
+      .pipe(
+        map((i) => {
+          return i.value.studentData;
+        })
+      )
+      .subscribe((x) => (studentData = x));
     studentData.id = Math.floor(Math.random() * 100).toString();
-    studentData.gender = addStudentForm.value.studentData.gender;
     this.studentDetailsService.push(studentData);
   }
 
   editStudentDetail(editStudentForm, index) {
-    let studentDetail = this.getStudentDetail(index);
-    studentDetail.name = editStudentForm.value.studentData.username;
+    let studentDetail: studentInfo = this.getStudentDetail(index);
+    studentDetail.name = editStudentForm.value.studentData.name;
     studentDetail.status = editStudentForm.value.studentData.status;
     studentDetail.std = editStudentForm.value.studentData.std;
     studentDetail.gender = editStudentForm.value.studentData.gender;
@@ -53,7 +52,6 @@ export class AppService {
 
   searchStudentDetailsLatest(searchValue) {
     let studentInfo = this.getStudentDetails().slice();
-    console.log('SearchedValue', searchValue);
     let studentDetails =
       searchValue === ''
         ? studentInfo
@@ -65,6 +63,8 @@ export class AppService {
 
   removeHighlight() {
     let highlight = document.querySelector('.highlight');
-    highlight.classList.remove('highlight');
+    highlight.classList.length == 1
+      ? highlight.classList.remove('highlight')
+      : '';
   }
 }
