@@ -22,7 +22,7 @@ export class AppService {
 
   addStudentDetail(addStudentForm) {
     let studentData: studentInfo;
-    of(addStudentForm)
+    let createStudent = of(addStudentForm)
       .pipe(
         map((i) => {
           return i.value.studentData;
@@ -31,6 +31,7 @@ export class AppService {
       .subscribe((x) => (studentData = x));
     studentData.id = Math.floor(Math.random() * 100).toString();
     this.studentDetailsService.push(studentData);
+    createStudent.unsubscribe();
   }
 
   editStudentDetail(editStudentForm, index) {
