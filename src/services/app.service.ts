@@ -1,10 +1,10 @@
 import { studentDetails, studentInfo } from '../assets/model/localstorage';
-import { of } from 'rxjs';
+import { of, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export class AppService {
   studentDetailsService = studentDetails;
-
+  highlight: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor() {}
 
   getStudentDetails() {
@@ -30,7 +30,7 @@ export class AppService {
       )
       .subscribe((x) => (studentData = x));
     studentData.id = Math.floor(Math.random() * 100).toString();
-    this.studentDetailsService.push(studentData);
+    this.studentDetailsService.unshift(studentData);
     createStudent.unsubscribe();
   }
 
@@ -57,7 +57,7 @@ export class AppService {
       searchValue === ''
         ? studentInfo
         : studentInfo.filter((i) => {
-            return i.name === searchValue;
+            return i.name.includes(searchValue);
           });
     return studentDetails;
   }

@@ -1,5 +1,5 @@
 // AppService
-export let studentDetails = [
+let studentDetails = [
   { id: '1', name: 'Karthik', gender: 'Male', std: '12', status: 'Pass' },
   { id: '2', name: 'Vignesh', gender: 'Male', std: '12', status: 'Pass' },
   { id: '3', name: 'Manish', gender: 'Male', std: '10', status: 'Fail' },
@@ -12,15 +12,17 @@ export let studentDetails = [
 ];
 
 //HomeModule
-export let genderArr = ['Male', 'Female'];
-export let statusArr = ['Pass', 'Fail'];
-export let stdArr = ['8', '9', '10', '11', '12'];
+let genderArr = ['Male', 'Female'];
+let statusArr = ['Pass', 'Fail'];
+let stdArr = ['8', '9', '10', '11', '12'];
 
 //Global
-export interface studentInfo {
+interface studentInfo {
   id: string;
   name: string;
+  gender: string;
   std: string;
   status: string;
-  gender: string;
 }
+
+export { studentDetails, genderArr, statusArr, stdArr, studentInfo };

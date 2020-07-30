@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-5">
+    <div class="col-xs-5" style="position: relative; z-index: -1;">
       <br />
       <input
         type="text"
         (keyup)="searchValue.next($event.target.value)"
-        class="form-control searchPos"
+        class="form-control"
         placeholder="Type here to search..."
         name="Search"
       />
@@ -13,7 +13,7 @@
   </div>
   <div class="row">
     <div
-      class="col-xs-12 col-lg-7 col-md-5 changeTableSize home table-responsive"
+      class="col-xs-6 col-lg-7 col-md-5 changeTableSize home table-responsive"
     >
       <table class="table table-hover">
         <thead>
@@ -28,7 +28,11 @@
           </tr>
         </thead>
         <tbody *ngFor="let student of getStudentDetails(); let i = index">
-          <tr [ngClass]="{ highlight: student.id === studentId }">
+          <tr
+            [ngClass]="{
+              highlight: highlightCond && student.id === studentId
+            }"
+          >
             <td class="manifest">{{ student.id }}</td>
             <td>{{ student.name }}</td>
             <td>{{ student.gender }}</td>

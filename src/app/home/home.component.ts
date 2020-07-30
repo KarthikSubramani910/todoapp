@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { PaginationService } from 'src/services/pagination.service';
 import { Subscription, Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -21,16 +21,17 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('login') signInForm: NgForm;
-
   loggedIn: boolean = false;
   studentId: number;
   searchedValue: string = '';
   reverse = true;
   defaultPageNumber = 1;
   pageLength;
+  highlightCond = false;
   searchValue: Subject<string> = new Subject();
   private authSubscription: Subscription;
   private searchSubscription: Subscription;
+  private highlightSubscription: Subscription;
 
   constructor(
     private appService: AppService,
@@ -46,8 +47,15 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         this.loggedIn = signed;
       }
     );
+
+    this.highlightSubscription = this.appService.highlight.subscribe(
+      (highlight: boolean) => {
+        this.highlightCond = highlight;
+      }
+    );
+
     this.searchSubscription = this.searchValue
-      .pipe(debounceTime(500))
+      .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((search: string) => {
         this.searchedValue = search;
       });
@@ -82,6 +90,8 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   editStudent(index) {
     this.route.navigate(['student/edit', index]);
     this.studentId = index;
+    this.appService.highlight.next(true);
+    console.log('editStudent' + this.highlightCond);
   }
 
   deleteStudentDetail(value) {
@@ -99,5 +109,6 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   ngOnDestroy() {
     this.authSubscription.unsubscribe();
     this.searchSubscription.unsubscribe();
+    this.highlightSubscription.unsubscribe();
   }
 }
