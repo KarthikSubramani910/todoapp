@@ -30,7 +30,7 @@ export class AppService {
       )
       .subscribe((x) => (studentData = x));
     studentData.id = Math.floor(Math.random() * 100).toString();
-    this.studentDetailsService.push(studentData);
+    this.studentDetailsService.unshift(studentData);
     createStudent.unsubscribe();
   }
 
